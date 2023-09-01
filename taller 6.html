@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gestión de Alumnos y Profesores</title>
+</head>
+<body>
+    <h1>Gestión de Alumnos y Profesores</h1>
+
+    <!-- Formulario para agregar alumno -->
+    <h2>Agregar Alumno</h2>
+    <form id="formAlumno">
+        Matrícula: <input type="text" id="matriculaAlumno"><br>
+        DNI: <input type="text" id="dniAlumno"><br>
+        Nombre: <input type="text" id="nombreAlumno"><br>
+        <button type="button" onclick="agregarAlumno()">Agregar Alumno</button>
+    </form>
+
+    <!-- Lista de alumnos -->
+    <h3>Lista de Alumnos</h3>
+    <ul id="listaAlumnos">
+    </ul>
+
+    <!-- Formulario para agregar profesor -->
+    <h2>Agregar Profesor</h2>
+    <form id="formProfesor">
+        DNI: <input type="text" id="dniProfesor"><br>
+        Nombre: <input type="text" id="nombreProfesor"><br>
+        Domicilio: <input type="text" id="domicilioProfesor"><br>
+        <button type="button" onclick="agregarProfesor()">Agregar Profesor</button>
+    </form>
+
+    <!-- Lista de profesores -->
+    <h3>Lista de Profesores</h3>
+    <ul id="listaProfesores">
+    </ul>
+
+    <script>
+        // Arreglos para almacenar alumnos y profesores (simulación)
+        var alumnos = [];
+        var profesores = [];
+
+        // Función para agregar un alumno
+        function agregarAlumno() {
+            var matricula = document.getElementById("matriculaAlumno").value;
+            var dni = document.getElementById("dniAlumno").value;
+            var nombre = document.getElementById("nombreAlumno").value;
+
+            var alumno = { matricula: matricula, dni: dni, nombre: nombre };
+            alumnos.push(alumno);
+
+            actualizarListaAlumnos();
+            limpiarFormulario("formAlumno");
+        }
+
+        // Función para agregar un profesor
+        function agregarProfesor() {
+            var dni = document.getElementById("dniProfesor").value;
+            var nombre = document.getElementById("nombreProfesor").value;
+            var domicilio = document.getElementById("domicilioProfesor").value;
+
+            var profesor = { dni: dni, nombre: nombre, domicilio: domicilio };
+            profesores.push(profesor);
+
+            actualizarListaProfesores();
+            limpiarFormulario("formProfesor");
+        }
+
+        // Función para actualizar la lista de alumnos
+        function actualizarListaAlumnos() {
+            var lista = document.getElementById("listaAlumnos");
+            lista.innerHTML = "";
+            alumnos.forEach(function(alumno) {
+                var li = document.createElement("li");
+                li.appendChild(document.createTextNode("Matrícula: " + alumno.matricula + ", DNI: " + alumno.dni + ", Nombre: " + alumno.nombre));
+                lista.appendChild(li);
+            });
+        }
+
+        // Función para actualizar la lista de profesores
+        function actualizarListaProfesores() {
+            var lista = document.getElementById("listaProfesores");
+            lista.innerHTML = "";
+            profesores.forEach(function(profesor) {
+                var li = document.createElement("li");
+                li.appendChild(document.createTextNode("DNI: " + profesor.dni + ", Nombre: " + profesor.nombre + ", Domicilio: " + profesor.domicilio));
+                lista.appendChild(li);
+            });
+        }
+
+        // Función para limpiar un formulario
+        function limpiarFormulario(formId) {
+            var form = document.getElementById(formId);
+            form.reset();
+        }
+    </script>
+</body>
+</html>
